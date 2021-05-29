@@ -11,6 +11,7 @@
             </div>
             <div class="links">
                 <router-link to="/">Home</router-link> 
+                <router-link to="/productos">Productos</router-link>
                 <router-link to="/about">Nosotros</router-link>
                 <router-link to="/carrito" class="carrito">
                     <p>{{items}}</p>        
@@ -74,7 +75,7 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 20%;
+        width: 25%;
 
     }
 
