@@ -1,12 +1,13 @@
 <template>
   <div class="productos container">
-    <Producto :producto="producto"/>
+    <Producto v-for="producto in productos" :key=producto._id :producto="producto"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Producto from '../components/Producto';
+import axios from 'axios'
 
 export default {
   name: 'Productos',
@@ -15,17 +16,14 @@ export default {
   },
   data(){
     return{
-      producto: {
-        id: 1,
-        img: '../assets/img/prueba.jpg',
-        precio: 10,
-        nomProd: 'Pescadito',
-        desc: 'Pescado rico',
-        categoria: 'Pescado'
-      }
+      productos: [],
     }
+  }, mounted(){
+      axios.get('http://localhost:4000/productos')
+          .then(res => this.productos = res.data)
+    }  
   }
-}
+
 </script>
 
 <style scoped>

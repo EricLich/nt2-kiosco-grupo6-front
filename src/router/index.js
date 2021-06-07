@@ -20,7 +20,7 @@ const routes = [
     component: Productos
   },
   {
-    path: "/producto/:id",
+    path: "/productos/:id",
     name: "pag-producto",
     component: VistaProd,
     props: true

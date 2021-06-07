@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="{ name: 'pag-producto', params: { id: producto.id }}">
+  <router-link :to="{ name: 'pag-producto', params: { id: producto._id }}">
     <div class="producto" :key="producto.id">
-        <img :src="producto.img"  alt="producto"/>
+        <!-- <img :src="producto.img"  alt="producto"/> -->
         <div class="data">
             <h3 class="precio">$ {{ producto.precio }}</h3>
             <h4 class="nomProd">{{ producto.nomProd }}</h4>
@@ -29,7 +29,6 @@ export default {
 <style scoped>
 
     .producto{
-
         padding: 0 !important;
         height: 350px;
         width: 240px;
@@ -42,6 +41,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        align-items: flex-start;
     }
 
     .producto:hover{
