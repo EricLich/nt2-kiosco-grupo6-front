@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Productos from '../views/Productos'
 import VistaProd from '../views/VistaProd'
+import VistaCarrito from '../views/VistaCarrito'
+import VistaAgregarProducto from '../views/VistaAgregarProducto'
 
 Vue.use(VueRouter)
 
@@ -23,6 +25,24 @@ const routes = [
     path: "/productos/:id",
     name: "pag-producto",
     component: VistaProd,
+    props: true
+  },
+  {
+    path: "/carrito",
+    name: "pag-carrito",
+    component: VistaCarrito,
+    props: true
+  },
+  {
+    path: "/agregar-producto",
+    name: "pag-agregar-prod",
+    component: VistaAgregarProducto,
+    props: true
+  },
+  {
+    path: "/editar-producto/:id",
+    name: "pag-editar-prod",
+    component: VistaAgregarProducto,
     props: true
   }
 ]

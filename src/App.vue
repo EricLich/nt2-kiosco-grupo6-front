@@ -42,4 +42,9 @@ export default({
   margin: auto;
 }
 
+.money{
+  color: rgb(64, 146, 64);
+  font-weight: bold;
+}
+
 </style>

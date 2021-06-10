@@ -2,19 +2,19 @@
     <div id="nav">
         <div class="container nav-centro">
             <div class="logo-busqueda">
-                <router-link to="/">
-                    asd
+                <router-link to="/productos">
+                    Tienda - Grupo 6
                 </router-link>
                 <div class="busqueda">
                     hola
                 </div>
             </div>
             <div class="links">
-                <router-link to="/">Home</router-link> 
-                <router-link to="/productos">Productos</router-link>
+                <router-link to="/productos">Home</router-link> 
                 <router-link to="/about">Nosotros</router-link>
+                <router-link to="/agregar-producto">Agregar</router-link>
                 <router-link to="/carrito" class="carrito">
-                    <p>{{items}}</p>        
+                    <p> {{ cantEnCarrito == 0 ? 0 : cantEnCarrito}} </p>        
                     <i class="fas fa-shopping-cart"></i>
                 </router-link>
             </div>
@@ -27,9 +27,15 @@
 export default {
     data(){
         return{
-            items: 9
+
         }
-    }
+    },
+    computed: {
+        cantEnCarrito(){
+            return this.$store.getters.getCantEnCarrito;
+        }
+    } 
+    
 }
 </script>
 
@@ -42,9 +48,10 @@ export default {
         height: 80px;
         margin: 10px auto;
         border-radius: 15px;
-        -webkit-box-shadow: 0px 6px 15px 6px rgba(82,82,82,0.6);
+        -webkit-box-shadow: 0px 10px 20px 10px rgba(82,82,82,0.6);
         -moz-box-shadow: 0px 6px 15px 6px rgba(82,82,82,0.6);
         box-shadow: 0px 6px 15px 6px rgba(82,82,82,0.6);
+        opacity: 0.95;
     }
     .nav-centro{
         display: flex;
@@ -75,7 +82,8 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 25%;
+        width: 30%;
+        min-width: 30%;
 
     }
 
@@ -83,6 +91,8 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        margin-top: -7px;
     }
 
     .carrito i{
@@ -92,7 +102,8 @@ export default {
     .carrito p{
         font-size: 14px;
         font-weight: bold;
-        margin-left: 35px;
+        margin-left: 30px;
+        margin-bottom: -5px;
     }
 
 

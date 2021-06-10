@@ -1,27 +1,55 @@
 <template>
-  <router-link :to="{ name: 'pag-producto', params: { id: producto._id }}">
     <div class="producto" :key="producto.id">
-        <!-- <img :src="producto.img"  alt="producto"/> -->
+        <img :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)"  alt="producto"/> 
         <div class="data">
             <h3 class="precio">$ {{ producto.precio }}</h3>
-            <h4 class="nomProd">{{ producto.nomProd }}</h4>
+            <router-link class="link" :to="{ name: 'pag-producto', params: { id: producto._id }}">
+                <h4 class="nomProd">{{ producto.nomProd }}</h4>
+            </router-link>
             <span class="desc">{{ producto.desc }}</span>
-            <button class="agregarAlCarrito">+</button>
+            <div class="botonera">
+                <button class="agregarAlCarrito" @click="agregarAlCarrito()" >+</button>
+                <router-link :to="{ name: 'pag-editar-prod', params: { id: producto._id }}" class="editar"><i class="fa fa-pencil" aria-hidden="true"></i></router-link>
+                <button class="eliminar" @click="eliminarProducto()"><i class="fa fa-trash eliminar" ></i></button>
+            </div>
         </div>
     </div>
-  </router-link>
 </template>
 
 <script>
-//REVISAR IMAGEN QUE NO SE VE
+import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Producto',
+  data(){
+      return{
+          cant: 10
+      }
+  },
   components: {
     
   }, 
   props: {
       producto: Object
+  },
+  methods:{
+      agregarAlCarrito(){
+          this.$store.dispatch('agregarAlCarrito', {
+              producto: this.producto,
+              cant: this.cant
+          })
+      },
+      eliminarProducto(){
+          axios.delete(`${this.getApiUrl}/productos/${this.producto._id}`).then(res => console.log(res)).catch(err => console.log(err)) 
+          this.$emit('borrarDelFront', this.producto._id);
+      }
+  },
+  computed:{
+      img(){
+          return this.producto.imgPath
+      },
+      ...mapGetters(['getApiUrl'])
   }
 }
 </script>
@@ -42,11 +70,12 @@ export default {
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
+        margin-right: 40px;
+        transition: ease-in-out 0.1s;
     }
 
     .producto:hover{
-        transform: scale(1.01);
-        transition: ease-in-out;
+        transform: scale(1.02);
     }
     img{
         width: 100%;
@@ -74,11 +103,12 @@ export default {
 
     .data button{
         color: white;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border: none;
-        background: rgba(30, 238, 30, 0.753);
         border-radius: 5px;
+        padding: 0;
+        margin: 0;
     }
 
     .desc{
@@ -86,6 +116,53 @@ export default {
         font-size: 12px;
         color: rgb(170, 170, 170);
         font-weight: bold;
+    }
+
+    .agregarAlCarrito{
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        transition: ease-in-out 0.1s;
+        background: rgba(30, 238, 30, 0.753);
+    }
+
+    .agregarAlCarrito:hover{
+        color: rgba(30, 238, 30, 0.753);
+        background-color: #fff;
+        border: 1px solid rgba(30, 238, 30, 0.753);
+        transform: scale(1.01);
+        box-shadow: 0px 2px 7px 2px rgba(151, 151, 151, 0.794);
+
+    }
+
+    .editar{
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        transition: ease-in-out 0.1s;
+        background: yellow;
+        color: white;
+        border-radius: 5px;
+        padding: 2px 6px 2px 6px;
+        margin-right: 5px;
+    }
+
+    .eliminar{
+        background-color: rgb(255, 0, 0);
+        cursor: pointer;
+    }
+
+    .botonera{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .botonera button{
+        margin-right: 5px;
     }
 
 

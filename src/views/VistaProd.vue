@@ -1,7 +1,7 @@
 <template>
   <div class="container producto">  
-<!--     <img src="../assets/img/prueba.jpg" alt="">
- -->    <div class="precio-info-compra">
+     <img :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)" alt="">
+      <div class="precio-info-compra">
       <div class="info">
         <h2>{{ producto.nomProd }}</h2>
         <h3>${{ producto.precio }}</h3>
@@ -13,7 +13,7 @@
       <p v-if="producto.stock > 0">Hay stock</p>
       <p v-else>No hay stock de este producto</p>
       <p v-if="producto.stock > 0"> Stock: {{ producto.stock }} </p>
-      <button>Comprar ahora</button>
+      <button @click="agregarAlCarrito()">Agregar al Carrito</button>
     </div>
   </div>
 </template>
@@ -32,14 +32,22 @@ export default {
   data(){
     return{
       ...mapGetters(['getApiUrl']),
-      producto:{}
+      producto:{},
+      cant:10
     } 
   },
   created(){
-    const apiUrl = this.getApiUrl()
-    axios.get(`${apiUrl}/productos/${this.id}`)
+    axios.get(`${this.getApiUrl()}/productos/${this.id}`)
           .then(res => this.producto = res.data)
-    console.log(this.producto.nomProd)
+          .catch(err => console.log(err))
+  },
+  methods:{
+      agregarAlCarrito(){
+          this.$store.dispatch('agregarAlCarrito', {
+              producto: this.producto,
+              cant: this.cant
+          })
+      }
   },
   computed: {
     },
