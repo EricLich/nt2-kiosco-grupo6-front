@@ -4,6 +4,8 @@ import Productos from '../views/Productos'
 import VistaProd from '../views/VistaProd'
 import VistaCarrito from '../views/VistaCarrito'
 import VistaAgregarProducto from '../views/VistaAgregarProducto'
+import VistaAgregarCategoria from '../views/VistaAgregarCategoria'
+import VistaPago from '../views/VistaPago'
 
 Vue.use(VueRouter)
 
@@ -37,13 +39,24 @@ const routes = [
     path: "/agregar-producto",
     name: "pag-agregar-prod",
     component: VistaAgregarProducto,
-    props: true
+  },
+  {
+    path:"/agregar-categoria",
+    name: "agregar-cat",
+    component: VistaAgregarCategoria,
+    props:true
   },
   {
     path: "/editar-producto/:id",
     name: "pag-editar-prod",
     component: VistaAgregarProducto,
     props: true
+  },
+  {
+    path: "/pago",
+    name: "pag-pago",
+    component: VistaPago,
+    props:true
   }
 ]
 

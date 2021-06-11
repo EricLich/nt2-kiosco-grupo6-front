@@ -47,4 +47,17 @@ export default({
   font-weight: bold;
 }
 
+.container-form{
+  margin-top: 50px;
+        height: 1000px;
+        background-color: rgb(250, 249, 250);
+        border-radius: 15px;
+        -webkit-box-shadow: 0px 6px 15px 6px rgba(82,82,82,0.6);
+        -moz-box-shadow: 0px 6px 15px 6px rgba(82,82,82,0.6);
+        box-shadow: 0px 6px 15px 6px rgba(100, 100, 100, 0.6);
+        padding: 70px;
+        display: flex;
+        flex-direction: column;
+}
+
 </style>

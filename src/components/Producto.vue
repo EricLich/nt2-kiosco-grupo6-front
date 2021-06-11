@@ -7,6 +7,8 @@
                 <h4 class="nomProd">{{ producto.nomProd }}</h4>
             </router-link>
             <span class="desc">{{ producto.desc }}</span>
+            <p v-if="producto.stock < 10">Ultimos {{ producto.stock }} en stock!</p>
+            <input type="number" :max="producto.stock" v-model="cant">
             <div class="botonera">
                 <button class="agregarAlCarrito" @click="agregarAlCarrito()" >+</button>
                 <router-link :to="{ name: 'pag-editar-prod', params: { id: producto._id }}" class="editar"><i class="fa fa-pencil" aria-hidden="true"></i></router-link>
@@ -24,7 +26,7 @@ export default {
   name: 'Producto',
   data(){
       return{
-          cant: 10
+          cant: 0
       }
   },
   components: {
@@ -35,10 +37,15 @@ export default {
   },
   methods:{
       agregarAlCarrito(){
-          this.$store.dispatch('agregarAlCarrito', {
-              producto: this.producto,
-              cant: this.cant
-          })
+          if(this.cant > 0){
+              this.$store.dispatch('agregarAlCarrito', {
+                  producto: this.producto,
+                  cant: this.cant
+              })
+              this.cant = 0;
+          }else{
+              alert("Tenes que seleccionar al menos un producto")
+          }
       },
       eliminarProducto(){
           axios.delete(`${this.getApiUrl}/productos/${this.producto._id}`).then(res => console.log(res)).catch(err => console.log(err)) 
@@ -49,7 +56,7 @@ export default {
       img(){
           return this.producto.imgPath
       },
-      ...mapGetters(['getApiUrl'])
+      ...mapGetters(['getApiUrl', 'getcantEnCarrito'])
   }
 }
 </script>

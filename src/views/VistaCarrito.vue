@@ -6,6 +6,7 @@
       <h2 v-if="this.getValorTotalCarrito > 0" class="total money" >Total: ${{ this.getValorTotalCarrito }} </h2>        
       <h2 v-else>Cuando agregues productos se verán en esta página</h2>
     </div>
+    <router-link :to="{name: 'pag-pago', params: {productos: this.productos, total: this.getValorTotalCarrito}}">Pagar</router-link> 
   </div>
 </template>
 

@@ -13,8 +13,10 @@ export default new Vuex.Store({
     AGREGAR_AL_CARRITO: (state, {producto, cant}) => {
       const existeEnCarrito = state.carrito.find(item => item._id == producto._id);
       if(existeEnCarrito == undefined){
+        cant = Number.parseInt(cant);
         state.carrito.push({...producto, cant});
       }else{
+        cant = Number.parseInt(cant);
         existeEnCarrito.cant += cant;
       }
 

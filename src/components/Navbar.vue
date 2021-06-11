@@ -12,7 +12,8 @@
             <div class="links">
                 <router-link to="/productos">Home</router-link> 
                 <router-link to="/about">Nosotros</router-link>
-                <router-link to="/agregar-producto">Agregar</router-link>
+                <router-link to="/agregar-producto">Agregar prod</router-link>
+                <router-link to="/agregar-categoria">Agregar cat</router-link>
                 <router-link to="/carrito" class="carrito">
                     <p> {{ cantEnCarrito == 0 ? 0 : cantEnCarrito}} </p>        
                     <i class="fas fa-shopping-cart"></i>
@@ -82,8 +83,8 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 30%;
-        min-width: 30%;
+        width: 35%;
+        min-width: 35%;
 
     }
 
