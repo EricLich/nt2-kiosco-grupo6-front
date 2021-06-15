@@ -87,6 +87,7 @@ export default {
                 .then(res => {
                     if(res.status == 200){
                         alert('Factura generada!')
+                        this.$store.dispatch('vaciarCarrito');
                     }else{
                         alert('Hubo un error')
                     }

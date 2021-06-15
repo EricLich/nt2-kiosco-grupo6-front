@@ -32,6 +32,9 @@ export default new Vuex.Store({
         }
       }
       state.carrito.splice(i, 1 );
+    },
+    VACIAR_CARRITO: state => {
+      state.carrito = [];
     }
   },
   actions: {
@@ -41,6 +44,9 @@ export default new Vuex.Store({
     eliminarDeCarrito: ({commit}, producto) => {
       commit('ELIMINAR_DE_CARRITO', producto)
     },
+    vaciarCarrito: ({commit}) => {
+      commit('VACIAR_CARRITO');
+    }
   },
   modules: {
   },

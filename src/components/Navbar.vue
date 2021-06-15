@@ -2,7 +2,7 @@
     <div id="nav">
         <div class="container nav-centro">
             <div class="logo-busqueda">
-                <router-link to="/productos">
+                <router-link to="/">
                     Tienda - Grupo 6
                 </router-link>
                 <div class="busqueda">
@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="links">
-                <router-link to="/productos">Home</router-link> 
+                <router-link to="/">Home</router-link> 
                 <router-link to="/about">Nosotros</router-link>
                 <router-link to="/agregar-producto">Agregar prod</router-link>
                 <router-link to="/agregar-categoria">Agregar cat</router-link>

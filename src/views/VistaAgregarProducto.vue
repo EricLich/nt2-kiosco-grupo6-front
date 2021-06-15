@@ -11,7 +11,7 @@
           placeholder="Introduce el nombre del producto"
         />
       </div>
-      <div class="form-input">
+      <div class="form-input select">
         <label for="categoria">Categoria:</label>
         <select v-model="producto.categoriaId" name="categoria" required id="">
           <option value="" disabled selected>-- Seleccionar --</option>
@@ -149,4 +149,91 @@ export default {
 </script>
 
 <style scoped>
+
+  .form-agregado{
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 60vh;
+    min-width: 70%;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px 4px rgba(151, 151, 151, 0.287);
+    padding: 20px;
+    justify-content: space-evenly;
+    align-items: flex-start;
+  }
+
+  .form-input{
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .form-input label{
+    margin-bottom: 5px;
+  }
+
+  .form-input input{
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.335);
+    border-radius: 10px;
+    padding: 10px;
+    transition: ease-in-out 10ms;
+  }
+
+
+
+  input[type="file"]{
+    padding-bottom: 30px;
+    border: none;
+  }
+
+  .form-agregado button{
+    align-self: flex-end;
+    background-color: rgb(79, 186, 79);
+    padding: 5px 15px;
+    border: 2px solid rgb(79, 186, 79);
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: ease-in-out 10ms;
+    box-shadow: 0px 2px 5px 2px rgba(151, 151, 151, 0.287);
+  }
+  .form-agregado button:hover{
+    transform: scale(1.02);
+    background-color: #fff;
+    color:rgb(79, 186, 79);
+  }
+
+  .select{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .select label{
+    margin-bottom: 0;
+  }
+
+  select{
+    width: 40%;
+    text-align: center;
+    padding:5px;
+    background-color: rgba(243, 243, 243, 0.733);
+    border: 1px solid rgba(128, 128, 128, 0.383);
+    border-radius: 10px;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+
 </style>
