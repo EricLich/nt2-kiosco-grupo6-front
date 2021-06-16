@@ -1,7 +1,6 @@
 <template>
   <div class="producto" :key="producto.id">
-    <img
-      :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)"
+    <img       :src="require(`../../../nt2-kiosco-grupo6-back/src/assets/img/${this.producto.imgPath}`)"
       alt="producto"
     />
     <div class="data">
@@ -33,7 +32,7 @@
           class="editar"
           ><i class="fa fa-pencil" aria-hidden="true"></i
         ></router-link>
-        <i @click="eliminarProducto()" class="fa fa-trash eliminar"></i>
+        <i @click="desactivarProducto()" class="fa fa-trash eliminar"></i>
       </div>
     </div>
   </div>
@@ -66,7 +65,7 @@ export default {
         alert("Tenes que seleccionar al menos un producto");
       }
     },
-    eliminarProducto() {
+    desactivarProducto() {
       axios
         .delete(`${this.getApiUrl}/productos/${this.producto._id}`)
         .then((res) => console.log(res))

@@ -1,7 +1,7 @@
 <template>
   <div class="item-carrito">
     <div class="img-titulo">
-      <img :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)" alt="">
+      <img :src="require(`../../../nt2-kiosco-grupo6-back/src/assets/img/${this.producto.imgPath}`)" alt="">
       <router-link class="link" :to="{ name: 'pag-producto', params: { id: producto._id }}">
         <h2> {{ producto.nomProd }} </h2>
       </router-link>
