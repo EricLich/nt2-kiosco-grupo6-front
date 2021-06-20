@@ -1,13 +1,25 @@
 <template>
-  <div class="item-carrito">
+  <div class="item-carrito" v-if="producto.cant > 0">
     <div class="img-titulo">
-      <img :src="require(`../../../nt2-kiosco-grupo6-back/src/assets/img/${this.producto.imgPath}`)" alt="">
+      <img :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)" alt="">
       <router-link class="link" :to="{ name: 'pag-producto', params: { id: producto._id }}">
         <h2> {{ producto.nomProd }} </h2>
       </router-link>
     </div>
     <div class="cant-precio-botones">
-      <span>Cant: <strong>{{ producto.cant }}</strong></span>
+      <span class="cant">
+        <p>Cant: {{ producto.cant }}</p> 
+        <input type="number" :min="-producto.cant" :max="producto.stock - producto.cant" v-model="nuevaCant">
+        <i v-if="nuevaCant + producto.cant > 0"
+          class="fas fa-cart-plus agregarAlCarrito"
+          @click="cambiarCant()"
+        ></i>
+        <i v-else-if="nuevaCant < 0"
+          class="fa fa-trash eliminarDelCarrito"
+          @click="cambiarCant()"
+        ></i>
+        </span>
+      
       <p>p/unit: <strong>${{ producto.precio }}</strong></p>
       <p class="money">Total: <strong>${{ total }}</strong></p>
       <button @click="eliminarDeCarrito()" >
@@ -21,7 +33,7 @@
 export default {
   data(){
     return{
-      
+      nuevaCant: 0,
     }
   },
   props: {
@@ -30,6 +42,18 @@ export default {
   methods:{
     eliminarDeCarrito(){
       this.$store.dispatch('eliminarDeCarrito', this.producto)
+    },
+    cambiarCant(){
+      if(this.producto.cant == 0){
+        console.log('hols')
+      }else{
+        this.$store.dispatch('cambiarCantEnCarrito', {producto: this.producto, nuevaCant: this.nuevaCant});
+        this.nuevaCant = 0;
+        console.log(this.producto.cant)
+        if(this.producto.cant == 0){
+          this.eliminarDeCarrito();
+        }
+      }
     }
   },
   computed:{
@@ -57,6 +81,7 @@ export default {
     justify-content: space-between;
     padding: 20px;
     transition: ease-in-out 0.1s;
+    overflow: hidden;
   }
 
   .item-carrito:hover{
@@ -66,7 +91,7 @@ export default {
   }
 
   .img-titulo{
-    width: 20%;
+    width: 30%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -77,16 +102,16 @@ export default {
     min-width: 50px;
     max-width: 25%;
     margin-right: 7px;
-    
+    overflow: hidden;
   }
 
   .cant-precio-botones{
     
-    width: 25%;
+    width: 40%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     
   }
 
@@ -117,4 +142,61 @@ export default {
     color: black;
   }
 
+  .cant{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cant p{
+    margin-right: 7px;
+  }
+
+  input[type="number"]{
+    margin: 0 5px;
+    width: 60px;
+    padding: 9px 4px 9px 4px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0px 2px 5px 2px rgba(151, 151, 151, 0.287);
+
+  }
+
+  .agregarAlCarrito{
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgba(30, 238, 30, 0.753);
+    color: rgb(241, 241, 241);
+    border-radius: 5px;
+    padding: 6px 6px;
+    box-shadow: 0px 2px 5px 2px rgba(151, 151, 151, 0.287);
+    transition: ease-in-out 0.1s;
+    border: 1px solid rgba(30, 238, 30, 0.753);;
+  }
+
+  .agregarAlCarrito:hover{
+    color: rgba(30, 238, 30, 0.753);
+    background-color: #fff;
+    border: 1px solid rgba(30, 238, 30, 0.753);
+    transform: scale(1.01);
+  }
+
+  .eliminarDelCarrito{
+    cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        background: red;
+        color: rgb(241, 241, 241);
+        border-radius: 5px;
+        padding: 6px 8px;
+        box-shadow: 0px 2px 5px 2px rgba(151, 151, 151, 0.287);
+        transition: ease-in-out 0.1s;
+        border: 1px solid red;
+  }
+
+  .eliminarDelCarrito:hover{
+        background-color: #fff;
+        color: red;
+        border-color: red;
+    }
 </style>

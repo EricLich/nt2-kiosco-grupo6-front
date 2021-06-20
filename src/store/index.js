@@ -35,11 +35,19 @@ export default new Vuex.Store({
     },
     VACIAR_CARRITO: state => {
       state.carrito = [];
+    },
+    CAMBIAR_CANT_EN_CARRITO: (state, {producto, nuevaCant}) => {
+      const existeEnCarrito = state.carrito.findIndex(item => item._id == producto._id);
+      if(existeEnCarrito > -1){
+        state.carrito[existeEnCarrito].cant += Number.parseInt(nuevaCant)      }
     }
   },
   actions: {
     agregarAlCarrito: ({commit}, {producto, cant}) => {
       commit('AGREGAR_AL_CARRITO', {producto, cant});
+    },
+    cambiarCantEnCarrito: ({commit}, {producto, nuevaCant}) => {
+      commit('CAMBIAR_CANT_EN_CARRITO', {producto, nuevaCant});
     },
     eliminarDeCarrito: ({commit}, producto) => {
       commit('ELIMINAR_DE_CARRITO', producto)

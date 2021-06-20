@@ -1,6 +1,6 @@
 <template>
   <div class="container producto">  
-     <img :src="require(`../../../nt2-kiosco-grupo6-back/src/assets/img/${this.producto.imgPath}`)" alt="">
+     <img :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)" alt="">
       <div class="precio-info-compra">
       <div class="info">
         <h2>{{ producto.nomProd }}</h2>

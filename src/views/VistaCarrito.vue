@@ -4,7 +4,7 @@
     <ItemCarrito v-for="producto in productos" :key="producto._id" :producto="producto" />
     <div class="totales">
       <h2 v-if="this.getValorTotalCarrito > 0" class="total money" >Total: ${{ this.getValorTotalCarrito }} </h2>        
-      <h2 v-else>Cuando agregues productos se verán en esta página</h2>
+      <h2 v-else class="izq">Cuando agregues productos se verán en esta página</h2>
     </div>
     <router-link v-if="this.getValorTotalCarrito > 0" :to="{name: 'pag-pago', params: {productos: this.productos, total: this.getValorTotalCarrito}}" class="btn-pago">Pagar</router-link> 
   </div>
@@ -53,13 +53,17 @@ export default {
   }
 
   .totales{
+    display: flex;
+    flex-direction: column;
     align-self: flex-end;
+    width: 100%;
   }
 
   .total{
     margin-bottom: 5px;
     font-weight: bold;
     font-size: 28px;
+    align-self: flex-end;
   }
 
   .titulo-carrito{
@@ -87,6 +91,10 @@ export default {
     transform: scale(1.02);
     background-color: #fff;
     color:rgb(79, 186, 79);
+  }
+
+  .izq{
+    align-self: flex-start;
   }
 
 </style>

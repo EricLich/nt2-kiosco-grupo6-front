@@ -5,15 +5,13 @@
                 <router-link to="/">
                     Tienda - Grupo 6
                 </router-link>
-                <div class="busqueda">
-                    hola
-                </div>
             </div>
             <div class="links">
                 <router-link to="/">Home</router-link> 
                 <router-link to="/about">Nosotros</router-link>
                 <router-link to="/agregar-producto">Agregar prod</router-link>
                 <router-link to="/agregar-categoria">Agregar cat</router-link>
+                <router-link to="/activar-prods">Activar prod</router-link>
                 <router-link to="/carrito" class="carrito">
                     <p> {{ cantEnCarrito == 0 ? 0 : cantEnCarrito}} </p>        
                     <i class="fas fa-shopping-cart"></i>

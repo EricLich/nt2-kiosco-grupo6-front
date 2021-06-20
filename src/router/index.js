@@ -4,6 +4,7 @@ import Productos from '../views/Productos'
 import VistaProd from '../views/VistaProd'
 import VistaCarrito from '../views/VistaCarrito'
 import VistaAgregarProducto from '../views/VistaAgregarProducto'
+import VistaActivarProductos from '../views/VistaActivarProductos'
 import VistaAgregarCategoria from '../views/VistaAgregarCategoria'
 import VistaPago from '../views/VistaPago'
 
@@ -56,6 +57,12 @@ const routes = [
     path: "/pago",
     name: "pag-pago",
     component: VistaPago,
+    props:true
+  },
+  {
+    path: "/activar-prods",
+    name: "activar-prods",
+    component: VistaActivarProductos,
     props:true
   }
 ]

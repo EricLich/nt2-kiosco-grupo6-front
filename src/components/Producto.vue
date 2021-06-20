@@ -1,6 +1,6 @@
 <template>
   <div class="producto" :key="producto.id">
-    <img       :src="require(`../../../nt2-kiosco-grupo6-back/src/assets/img/${this.producto.imgPath}`)"
+    <img       :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)"
       alt="producto"
     />
     <div class="data">
