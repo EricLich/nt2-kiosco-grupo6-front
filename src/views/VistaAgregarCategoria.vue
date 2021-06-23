@@ -26,7 +26,10 @@ export default {
             categoria: {
                 nomCat: '',
                 descCat: ''
-            }
+            },
+            token: {headers: {
+                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHAiLCJpZCI6InRwIn0.4pHze58Eb6Sdr7u1lM0vguI4QhliGNkAgF27_Zc5p6k'
+        }}
         }
     },
     computed:{
@@ -35,8 +38,16 @@ export default {
     methods:{
         async agregar(){
             if(this.categoria.nomCat != '' && this.categoria.descCat != ''){
-                await axios.post(`${this.getApiUrl}/categoria`, this.categoria)
-                     .then(res => console.log(res))
+                await axios.post(`${this.getApiUrl}/categoria`, this.categoria, this.token)
+                     .then(res => {
+                       this.categoria.nomCat = '';
+                       this.categoria.descCat = '';
+                       if(res.status === 200){
+                         alert('Categoría agregada')
+                       }else{
+                         alert('Hubo un error')
+                       } 
+                     }) 
                      .catch(err => console.log(err))
             }else{
                 alert("No lleno bien los datos")

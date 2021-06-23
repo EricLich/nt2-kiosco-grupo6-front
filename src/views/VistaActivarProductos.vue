@@ -2,9 +2,10 @@
   <div class="container">
     <div class="productos">
       <h2>Activar Productos inactivos</h2>
-        <div class="prods">
+        <div v-if="productos.length > 0" class="prods">
             <ProductoInactivo class="prod-card" v-for="producto in productos" :key=producto._id :producto="producto" @borrarDelFront="eliminarProd"/>
         </div>
+        <h3 v-else>No hay productos inactivos</h3>
     </div>
   </div>
 </template>
@@ -24,9 +25,12 @@ export default {
     return{
       ...mapGetters(['getApiUrl']),
       productos: [],
+      token: {headers: {
+          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHAiLCJpZCI6InRwIn0.4pHze58Eb6Sdr7u1lM0vguI4QhliGNkAgF27_Zc5p6k'
+        }}
     }
   }, created(){      
-        axios.get(`${this.getApiUrl()}/productos/inactive-prods`) 
+        axios.get(`${this.getApiUrl()}/productos/inactive-prods`, this.token) 
             .then(res => this.productos = res.data)
             .catch(err => console.log(err))
     },
@@ -71,6 +75,9 @@ export default {
     row-gap: 25px;
     align-items: start;
 
+}
+h2{
+  margin-bottom: 20px;
 }
 
 

@@ -8,13 +8,13 @@
             </div>
             <div class="links">
                 <router-link to="/">Home</router-link> 
-                <router-link to="/about">Nosotros</router-link>
                 <router-link to="/agregar-producto">Agregar prod</router-link>
-                <router-link to="/agregar-categoria">Agregar cat</router-link>
+                <router-link to="/agregar-categoria">Agregar Cat</router-link>
                 <router-link to="/activar-prods">Activar prod</router-link>
+                <router-link to="/about">Nosotros</router-link>
                 <router-link to="/carrito" class="carrito">
-                    <p> {{ cantEnCarrito == 0 ? 0 : cantEnCarrito}} </p>        
-                    <i class="fas fa-shopping-cart"></i>
+                    <p v-if="cantEnCarrito > 0" > {{ cantEnCarrito == 0 ? 0 : cantEnCarrito}} </p>        
+                    <i class="fas fa-shopping-cart" :class="{}" ></i>
                 </router-link>
             </div>
         </div>
@@ -40,6 +40,9 @@ export default {
 
 <style scoped>
     #nav{     
+        z-index: 99;
+        position: sticky;
+        top: 10px;
         display: flex;
         align-items: center;
         background-color: var(--main-color);
@@ -71,6 +74,11 @@ export default {
         font-weight: bold;
         color: white;
         text-decoration: none;
+        transition: ease-in-out 10ms;
+    }
+
+    #nav a:hover{
+        transform: scale(1.05);
     }
 
     #nav a.router-link-exact-active {
@@ -81,7 +89,7 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 35%;
+        width: 50%;
         min-width: 35%;
 
     }
@@ -91,11 +99,11 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-top: -7px;
     }
 
     .carrito i{
         font-size: 18px;
+        transition: ease-in-out 2ms;
     }
 
     .carrito p{
@@ -103,6 +111,10 @@ export default {
         font-weight: bold;
         margin-left: 30px;
         margin-bottom: -5px;
+        padding: 2px 7px;
+        border-radius: 99px;
+        background-color: rgba(235, 38, 38, 0.904);
+        color: rgba(255, 255, 255, 0.788);
     }
 
 

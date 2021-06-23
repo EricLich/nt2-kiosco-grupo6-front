@@ -1,10 +1,10 @@
 <template>
-  <div class="producto" :key="producto.id">
+  <div class="producto" :key="producto._id">
     <img :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)"
       alt="producto"
     />
     <div class="data">
-      <h3 class="precio">$ {{ producto.precio }}</h3>
+      <h3 class="precio money">$ {{ producto.precio }}</h3>
       <router-link
         class="link"
         :to="{ name: 'pag-producto', params: { id: producto._id } }"
@@ -24,23 +24,32 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "ProductoInactivo",
+  data(){
+    return{
+      token: {headers: {
+        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHAiLCJpZCI6InRwIn0.4pHze58Eb6Sdr7u1lM0vguI4QhliGNkAgF27_Zc5p6k'
+        }},
+    }
+  },
   props: {
     producto: Object,
   },
   methods: {
     activarProducto() {
       axios
-        .put(`${this.getApiUrl}/productos/activate/${this.producto._id}`)
-        .then((res) => console.log(res))
+        .put(`${this.getApiUrl}/productos/activate/${this.producto._id}`, {} ,this.token)
+        .then(res => {
+          console.log(res)
+          this.$emit("borrarDelFront", this.producto._id);
+        })
         .catch((err) => console.log(err));
-      this.$emit("borrarDelFront", this.producto._id);
     },
   },
   computed: {
     img() {
       return this.producto.imgPath;
     },
-    ...mapGetters(["getApiUrl"]),
+      ...mapGetters(["getApiUrl"]),
   },
 };
 </script>

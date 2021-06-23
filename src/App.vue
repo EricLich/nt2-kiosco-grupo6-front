@@ -19,7 +19,7 @@ export default({
 <style>
 
 :root{
-  --main-color:rgba(12, 10, 134, 0.733);
+  --main-color:rgba(12, 10, 134, 0.822);
 }
 
 *{

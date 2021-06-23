@@ -80,12 +80,12 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    transition: ease-in-out 0.1s;
+    transition: ease-in-out 0.25s;
     overflow: hidden;
   }
 
   .item-carrito:hover{
-    transform: scale(1.02);
+    transform: scale(1.015);
 
     opacity: 1;
   }

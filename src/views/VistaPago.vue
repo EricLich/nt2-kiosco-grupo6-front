@@ -70,6 +70,9 @@ export default {
         productos: [],
         total: this.total
       },
+      token: {headers: {
+          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHAiLCJpZCI6InRwIn0.4pHze58Eb6Sdr7u1lM0vguI4QhliGNkAgF27_Zc5p6k'
+        }}
     };
   },
   created() {
@@ -93,13 +96,13 @@ export default {
             cant: this.productos[0].cant,
           });
       }    
-      axios.post(`${this.getApiUrl}/facturas`, this.factura)
+      axios.post(`${this.getApiUrl}/facturas`, this.factura, this.token)
         .then((res) => {
-          console.log(res)
-            alert("Factura generada!");
+          console.log(res);
             this.$store.dispatch("vaciarCarrito");
+            alert("Factura generada!");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err, 'hola'));
     }, 
   },
 };

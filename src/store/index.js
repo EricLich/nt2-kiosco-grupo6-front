@@ -5,9 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    categorias:[],
     carrito:[],
-    apiUrl: 'http://localhost:4000'
+    apiUrl: 'http://localhost:4000',
+
   },
   mutations: {
     AGREGAR_AL_CARRITO: (state, {producto, cant}) => {
@@ -19,7 +19,6 @@ export default new Vuex.Store({
         cant = Number.parseInt(cant);
         existeEnCarrito.cant += cant;
       }
-
     },
     ELIMINAR_DE_CARRITO: (state, producto) => {
       let i = 0;

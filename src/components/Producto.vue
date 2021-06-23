@@ -1,6 +1,6 @@
 <template>
   <div class="producto" :key="producto.id">
-    <img       :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)"
+    <img :src="require(`../../../server/src/assets/img/${this.producto.imgPath}`)"
       alt="producto"
     />
     <div class="data">
@@ -28,7 +28,7 @@
       </div>
       <div class="botonera">
         <router-link
-          :to="{ name: 'pag-editar-prod', params: { id: producto._id } }"
+          :to="{ name: 'pag-editar-prod', params: { id: producto._id, edit: true } }"
           class="editar"
           ><i class="fa fa-pencil" aria-hidden="true"></i
         ></router-link>
@@ -47,6 +47,9 @@ export default {
   data() {
     return {
       cant: 0,
+      token: {headers: {
+          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidHAiLCJpZCI6InRwIn0.4pHze58Eb6Sdr7u1lM0vguI4QhliGNkAgF27_Zc5p6k'
+        }}
     };
   },
   components: {},
@@ -67,7 +70,7 @@ export default {
     },
     desactivarProducto() {
       axios
-        .delete(`${this.getApiUrl}/productos/${this.producto._id}`)
+        .delete(`${this.getApiUrl}/productos/${this.producto._id}`, this.token)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
       this.$emit("borrarDelFront", this.producto._id);
@@ -87,50 +90,54 @@ export default {
     .producto{
         height: 450px;
         padding: 0 !important;
-        min-width: 240px;
+        min-width: 245px;
         background-color: #fff;
         border-radius: 15px;
         -webkit-box-shadow: 0px 6px 15px 6px rgba(82,82,82,0.6);
         -moz-box-shadow: 0px 6px 15px 6px rgba(82,82,82,0.6);
-        box-shadow: 0px 6px 15px 6px rgba(151, 151, 151, 0.6);
+        box-shadow: 0px 6px 15px 1px rgba(151, 151, 151, 0.445);
         padding: 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
-        transition: ease-in-out 0.1s;
+        transition: ease-in-out 0.2s;
         overflow: hidden;
     }
 
     .producto:hover{
         transform: scale(1.01);
+        box-shadow: 0px 6px 15px 6px rgba(151, 151, 151, 0.445);
     }
 
 
     img{
-        width: 100%;
+        max-width: 100%;
         height: 100%;
         overflow: hidden;
         place-self: center;
-        opacity: 0.9;
+        opacity: 0.7;
         border-radius: 15px 15px 0 0;
+        transition: ease-in-out 0.3s;
+        z-index: 0;
+        
     }
     img:hover{
-        transition: ease-in-out 0.3s;
-        animation: scale linear 0,3s;
+        transform: scale(1.04);
         opacity: 1.2;
     }
      
     .data{
-        width: 100%;
-        height: 70%;
-        text-align: left;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        background-color: rgb(241, 241, 241);
-        border-radius: 0 0 15px 15px;
+      z-index: 1;
+      width: 100%;
+      height: 70%;
+      text-align: left;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background-color: rgb(241, 241, 241);
+      border-radius: 0 0 15px 15px;
     }
 
     .precio{
